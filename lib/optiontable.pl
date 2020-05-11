@@ -40,6 +40,12 @@ while(<STDIN>) {
         my($opt, $type, $num)=($1,$2,$3);
         my $name;
         my $ext = $type;
+
+        if($opt =~ /OBSOLETE/) {
+            # skip obsolete options
+            next;
+        }
+
         if($opt =~ /^CURLOPT_(.*)/) {
             $name=$1;
         }
@@ -97,7 +103,6 @@ print <<FOOT
 };
 
 #ifdef CURLDEBUG
-
 /*
  * Curl_easyopts_check() is a debug-only function that returns non-zero
  * if this source file is not in sync with the options listed in curl/curl.h
