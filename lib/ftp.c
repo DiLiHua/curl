@@ -3234,7 +3234,7 @@ static CURLcode ftp_done(struct connectdata *conn, CURLcode status,
     if(conn->ssl[SECONDARYSOCKET].use) {
       /* The secondary socket used SSL so we must close down that part first
          before we close the socket for real */
-      Curl_ssl_shutdown(conn, SECONDARYSOCKET);
+      result = Curl_ssl_shutdown(conn, SECONDARYSOCKET);
 
       /* Note that we keep "use" set to TRUE since that (next) connection is
          still requested to use SSL */
